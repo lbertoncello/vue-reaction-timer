@@ -1,11 +1,18 @@
 <template>
   <h1>Ninja Reaction Timer</h1>
-  <button @click="start">Play</button>
+  <!-- 'disabled' refers to the HTML property, it's nothing unique from Vue -->
+  <button @click="start" :disabled="isPlaying" >Play</button>
+  <Block v-if="isPlaying" :delay="delay" />
 </template>
 
 <script>
+import Block from './components/Block.vue'
+
 export default {
   name: 'App',
+  components: {
+    Block
+  },
   data() {
     return {
       isPlaying: false,
@@ -17,7 +24,6 @@ export default {
       // An amount time between 1s and 4s
       this.delay = 1000 + (Math.random() * 3000)
       this.isPlaying = true
-      console.log(this.delay)
     }
   }
 }
